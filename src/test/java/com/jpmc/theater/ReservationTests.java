@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.time.*;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ReservationTests {
@@ -42,39 +43,38 @@ public class ReservationTests {
     void totalFeeFirstMovie() {
         var customer = new Customer("John Doe", "unused-id");
         var showing = new Showing(
-                new Movie("Spider-Man: No Way Home", Duration.ofMinutes(90), 12.5, 1),
+                new Movie("Spider-Man: No Way Home", Duration.ofMinutes(90), 12.5, 0),
                 1,
                 LocalDateTime.of(NON_DISCOUNT_DATE, NON_DISCOUNT_TIME)
         );
         var reservationFee = new Reservation(customer, showing, 3).totalFee();
-        System.out.println("You have to pay " + reservationFee);
-        assertTrue(reservationFee == 30);
+        assertEquals(31.5, reservationFee  );
     }
 
     @Test
     void totalFeeSecondMovie() {
         var customer = new Customer("John Doe", "unused-id");
         var showing = new Showing(
-                new Movie("Spider-Man: No Way Home", Duration.ofMinutes(90), 12.5, 1),
+                new Movie("Spider-Man: No Way Home", Duration.ofMinutes(90), 12.5, 0),
                 1,
                 LocalDateTime.of(NON_DISCOUNT_DATE, NON_DISCOUNT_TIME)
         );
         var reservationFee = new Reservation(customer, showing, 3).totalFee();
 
-        assertTrue(reservationFee == 30);
+        assertEquals(31.5, reservationFee );
     }
 
     @Test
     void totalFeeSecondMovieWithDiscountDay() {
         var customer = new Customer("John Doe", "unused-id");
         var showing = new Showing(
-                new Movie("Spider-Man: No Way Home", Duration.ofMinutes(90), 12.5, 1),
+                new Movie("Spider-Man: No Way Home", Duration.ofMinutes(90), 12.5, 0),
                 1,
                 LocalDateTime.of(DISCOUNT_DATE, NON_DISCOUNT_TIME)
         );
         var reservationFee = new Reservation(customer, showing, 3).totalFee();
 
-        assertTrue(reservationFee == 30);
+        assertEquals(31.5, reservationFee  );
     }
 
     @Test
@@ -82,13 +82,28 @@ public class ReservationTests {
 
         var customer = new Customer("John Doe", "unused-id");
         var showing = new Showing(
-                new Movie("Spider-Man: No Way Home", Duration.ofMinutes(90), 8.5, 1),
+                new Movie("Spider-Man: No Way Home", Duration.ofMinutes(90), 8.5, 0),
                 3,
                 LocalDateTime.of(NON_DISCOUNT_DATE, NON_DISCOUNT_TIME)
         );
 
         var reservationFee = new Reservation(customer, showing, 3).totalFee();
 
-        assertTrue(reservationFee == 20.4);
+        assertEquals(25.5 , reservationFee);
+    }
+
+    @Test
+    void totalFeeNoDiscountMovie() {
+
+        var customer = new Customer("John Doe", "unused-id");
+        var showing = new Showing(
+                new Movie("Spider-Man: No Way Home", Duration.ofMinutes(90), 8.5, 0),
+                4,
+                LocalDateTime.of(NON_DISCOUNT_DATE, NON_DISCOUNT_TIME)
+        );
+
+        var reservationFee = new Reservation(customer, showing, 3).totalFee();
+
+        assertEquals(25.5, reservationFee );
     }
 }

@@ -28,7 +28,7 @@ public class Showing {
     }
 
     public double getMovieFee() {
-        return  Math.round(roundToTwoDecimals(resyService.calculateTicketPrice(this)));
+        return  roundToTwoDecimals(resyService.calculateTicketPrice(this));
     }
 
     public int getSequenceOfTheDay() {

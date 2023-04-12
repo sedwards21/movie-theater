@@ -33,7 +33,7 @@ public class TheaterTests extends AbstractPojoTester {
         Theater theater = new Theater(cheapList);
         Customer john = new Customer("John Doe", "id-12345");
         Reservation reservation = theater.reserve(john, 2, 4);
-        assertEquals(reservation.totalFee(), 31.5);
+        assertEquals(reservation.totalFee(), 31.52);
     }
 
     @Test
