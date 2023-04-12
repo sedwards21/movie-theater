@@ -4,12 +4,13 @@ import com.jpmc.theater.service.PricingService;
 
 import java.time.LocalDateTime;
 
+import static com.jpmc.theater.util.Util.roundToTwoDecimals;
+
 public class Showing {
     private Movie movie;
     private int sequenceOfTheDay;
     private LocalDateTime showStartTime;
-
-    private PricingService resyService;
+    private transient PricingService resyService;
 
     public Showing(Movie movie, int sequenceOfTheDay, LocalDateTime showStartTime) {
         this.movie = movie;
@@ -27,7 +28,7 @@ public class Showing {
     }
 
     public double getMovieFee() {
-        return resyService.calculateTicketPrice(this);
+        return  Math.round(roundToTwoDecimals(resyService.calculateTicketPrice(this)));
     }
 
     public int getSequenceOfTheDay() {

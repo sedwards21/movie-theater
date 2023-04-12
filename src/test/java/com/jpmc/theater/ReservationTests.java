@@ -6,13 +6,10 @@ import org.junit.jupiter.api.Test;
 import java.time.*;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ReservationTests {
     LocalDateProvider provider = LocalDateProvider.singleton();
-    LocalDateTime nonDiscountDateTime = provider.currentDateTimeAt(10, 0);
-
     LocalDate DISCOUNT_DATE = LocalDate.of(2023, Month.APRIL, 7);
     LocalDate NON_DISCOUNT_DATE = LocalDate.of(2023, Month.APRIL, 12);
     LocalTime NON_DISCOUNT_TIME = LocalTime.of(17, 30);
@@ -39,7 +36,7 @@ public class ReservationTests {
             new Showing(specialMovie, 1, LocalDateProvider.singleton().currentDateTimeAt(9, 0)),
             new Showing(veryCheapMovie, 2, LocalDateProvider.singleton().currentDateTimeAt(11, 0)),
             new Showing(theBatMan, 3, LocalDateProvider.singleton().currentDateTimeAt(12, 50))
-            );
+    );
 
     @Test
     void totalFeeFirstMovie() {
@@ -51,7 +48,7 @@ public class ReservationTests {
         );
         var reservationFee = new Reservation(customer, showing, 3).totalFee();
         System.out.println("You have to pay " + reservationFee);
-        assertTrue( reservationFee == 30);
+        assertTrue(reservationFee == 30);
     }
 
     @Test
@@ -84,7 +81,6 @@ public class ReservationTests {
     void totalFeeThirdMovie() {
 
         var customer = new Customer("John Doe", "unused-id");
-        var dateTime = provider.currentDateTimeAt(10, 0);
         var showing = new Showing(
                 new Movie("Spider-Man: No Way Home", Duration.ofMinutes(90), 8.5, 1),
                 3,
@@ -92,8 +88,7 @@ public class ReservationTests {
         );
 
         var reservationFee = new Reservation(customer, showing, 3).totalFee();
-        System.out.println("You have to pay " + reservationFee);
 
-        assertTrue(reservationFee==20.4);
+        assertTrue(reservationFee == 20.4);
     }
 }

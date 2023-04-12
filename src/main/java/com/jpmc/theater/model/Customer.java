@@ -15,7 +15,7 @@ public class Customer {
 
     /**
      * @param name customer name
-     * @param id customer id
+     * @param id   customer id
      */
     public Customer(String name, String id) {
         this.id = id;

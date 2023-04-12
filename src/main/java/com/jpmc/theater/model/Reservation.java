@@ -12,6 +12,6 @@ public class Reservation {
     }
 
     public double totalFee() {
-        return Math.max( 0, (showing.getMovieFee() * audienceCount) );
+        return Math.max(0, (showing.getMovieFee() * audienceCount));
     }
 }

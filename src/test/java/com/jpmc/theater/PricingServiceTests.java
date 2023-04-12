@@ -31,7 +31,7 @@ public class PricingServiceTests {
     void testDiscountDayPrice() {
         Movie testMovie = new Movie(TEST_MOVIE_TITLE, Duration.ofMinutes(90), TEST_TICKET_PRICE, 0);
         Showing showing = new Showing(testMovie, NON_DISCOUNT_SEQUENCE, LocalDateTime.of(DISCOUNT_DATE, NON_DISCOUNT_TIME));
-        // ticket price should be 20% off of the regular price of 12.5
+        // ticket price should be 1$ less
         assertEquals(TEST_TICKET_PRICE - 1, pricingService.calculateTicketPrice(showing));
     }
 

@@ -6,11 +6,13 @@ import com.jpmc.theater.model.Showing;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Service
 public class PricingService {
+    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.00");
 
     public static boolean isMovieASpecial(int specialCode) {
         return Constants.MOVIE_CODE_SPECIAL == specialCode;
@@ -65,7 +67,6 @@ public class PricingService {
 
     public double calculateTicketPrice(Showing showing) {
         double discount = calculateDiscount(showing.getSequenceOfTheDay(), showing.getMovie(), showing.getStartTime());
-        System.out.println("Discount is = " + discount);
         return (showing.getMovie().getTicketPrice() - discount);
     }
 

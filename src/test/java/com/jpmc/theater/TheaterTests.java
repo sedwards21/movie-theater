@@ -27,12 +27,12 @@ public class TheaterTests extends AbstractPojoTester {
     public void testGettersAndSetters() {
         this.testGetterSetter(Theater.class);
     }
+
     @Test
     void totalFeeForCustomer() {
         Theater theater = new Theater(cheapList);
         Customer john = new Customer("John Doe", "id-12345");
         Reservation reservation = theater.reserve(john, 2, 4);
-        System.out.println("You have to pay " + reservation.totalFee());
         assertEquals(reservation.totalFee(), 31.5);
     }
 
@@ -42,7 +42,7 @@ public class TheaterTests extends AbstractPojoTester {
         theater.setSchedule(cheapList);
         Customer john = new Customer("John Doe", "id-12345");
         assertThrows(Exception.class,
-                ()->{
+                () -> {
                     theater.reserve(john, 35, 4);
                 });
     }

@@ -1,14 +1,16 @@
 package com.jpmc.theater.model;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.Duration;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import lombok.Getter;
-import lombok.Setter;
+import static com.jpmc.theater.util.Util.roundToTwoDecimals;
 
 @Getter
 @Setter
@@ -46,9 +48,7 @@ public class Theater {
     }
 
 
-
     public Reservation reserve(Customer customer, int sequence, int howManyTickets) {
-//    	TODO: use customer id?, do we not need to check room? 
         Showing showing;
         try {
             showing = schedule.get(sequence - 1);
@@ -71,18 +71,23 @@ public class Theater {
         if (value == 1) {
             return "";
         } else {
-            return "s";
+            return "(s)";
         }
     }
 
     public void printSchedule() {
-        System.out.println(provider.currentDate());
+        final String titleHeaderLen = String.valueOf(25);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a E, MMM dd yyyy");
+
         System.out.println("===================================================");
         schedule.forEach(s ->
-                System.out.println(s.getSequenceOfTheDay() + ": " + s.getStartTime() + " " + s.getMovie().getTitle() + " " + humanReadableFormat(s.getMovie().getRunningTime()) + " $" + s.getMovieFee())
+                System.out.printf("%s - %s - %s - %s - $%.2f\n", s.getSequenceOfTheDay(), s.getStartTime().format(formatter), s.getMovie().getTitle(), humanReadableFormat(s.getMovie().getRunningTime()), s.getMovieFee())
         );
         System.out.println("===================================================");
+
+
     }
+
 
     public void printScheduleJson() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
