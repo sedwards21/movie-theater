@@ -1,21 +1,31 @@
 package com.jpmc.theater;
 
+import com.jpmc.theater.model.*;
+import com.jpmc.theater.service.PricingService;
 import org.junit.jupiter.api.Test;
 
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class MovieTests {
-    @Test
-    void specialMovieWith50PercentDiscount() {
-        Movie spiderMan = new Movie("Spider-Man: No Way Home", Duration.ofMinutes(90),12.5, 1);
-        Showing showing = new Showing(spiderMan, 5, LocalDateTime.of(LocalDate.now(), LocalTime.now()));
-        assertEquals(10, spiderMan.calculateTicketPrice(showing));
+public class MovieTests extends AbstractPojoTester {
 
-        System.out.println(Duration.ofMinutes(90));
+    PricingService rService = new PricingService();
+    LocalDate NON_DISCOUNT_DATE = LocalDate.of(2023, Month.APRIL, 12);
+    LocalTime NON_DISCOUNT_TIME = LocalTime.of(17, 30);
+
+    @Test
+    public void testGettersAndSetters() {
+        this.testGetterSetter(Movie.class);
     }
+
+    @Test
+    public void testHashCode() {
+        Movie turningRed = new Movie("Turning Red", Duration.ofMinutes(85), 11, 0);
+
+        int hash = turningRed.hashCode();
+        assertEquals(1380412033,hash );
+    }
+
+
 }
