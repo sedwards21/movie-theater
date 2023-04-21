@@ -27,3 +27,4 @@ This is a poorly written application, and we're expecting the candidate to great
   * Any movies showing on 7th, you'll get 1$ discount
   * The discount amount applied only one if met multiple rules; biggest amount one
 * We want to print the movie schedule with simple text & json format
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16

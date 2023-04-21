@@ -1,7 +1,12 @@
-package com.jpmc.theater;
+package com.jpmc.theater.model;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Objects;
 
+@Getter
+@Setter
 public class Customer {
 
     private String name;
@@ -10,14 +15,13 @@ public class Customer {
 
     /**
      * @param name customer name
-     * @param id customer id
+     * @param id   customer id
      */
     public Customer(String name, String id) {
-        this.id = id; // NOTE - id is not used anywhere at the moment
-
+        this.id = id;
         this.name = name;
 
-        }
+    }
 
     @Override
     public boolean equals(Object o) {
